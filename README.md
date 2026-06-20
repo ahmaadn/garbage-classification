@@ -87,4 +87,4 @@ CONFIDENCE_THRESHOLD = 0.5       # Ambang batas confidence warning
 
 ## 📄 Lisensi
 
-MIT License
+Aplikasi ini dilisensikan di bawah Apache License 2.0. Lihat [LICENSE](LICENSE) untuk detail.
