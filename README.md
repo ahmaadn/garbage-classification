@@ -1,4 +1,4 @@
-# ♻️ EcoScan — Klasifikasi Sampah Berbasis CNN-KAN
+# ♻️ Web App Klasifikasi Sampah Berbasis CNN-KAN
 
 Aplikasi Streamlit untuk inferensi model **CNN + Kolmogorov-Arnold Network (KAN)** yang dilatih untuk klasifikasi 12 kategori sampah. Mendukung unggah file, kamera langsung, prediksi batch, dan UI bilingual (Indonesia / English).
 

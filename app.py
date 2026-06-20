@@ -45,7 +45,7 @@ def _get_label(kelas: str) -> str:
 
 TRANSLATIONS: dict[str, dict[str, str]] = {
     "id": {
-        "page_title": "EcoScan — Klasifikasi Sampah",
+        "page_title": "Klasifikasi Sampah",
         "hero_eyebrow": "CNN + Kolmogorov-Arnold Network",
         "hero_title_1": "Klasifikasi",
         "hero_title_span": "Sampah",
@@ -92,7 +92,7 @@ TRANSLATIONS: dict[str, dict[str, str]] = {
         "err_load_weights": "❌ Gagal memuat weights",
     },
     "en": {
-        "page_title": "EcoScan — Waste Classification",
+        "page_title": "Waste Classification",
         "hero_eyebrow": "CNN + Kolmogorov-Arnold Network",
         "hero_title_1": "AI-Powered",
         "hero_title_span": "Waste",
@@ -151,6 +151,7 @@ def _t(key: str, **kwargs: Any) -> str:
     if kwargs:
         text = text.format(**kwargs)
     return text
+
 
 # ─────────────────────────── CSS ─────────────────────────────────────────────
 
@@ -703,7 +704,9 @@ def gauge_svg(pct: float, warna: str) -> str:
 
 
 def kartu_hasil(h: HasilPrediksi) -> None:
-    meta = CLASS_META.get(h.kelas, {"emoji": "📌", "label": h.kelas, "label_en": h.kelas})
+    meta = CLASS_META.get(
+        h.kelas, {"emoji": "📌", "label": h.kelas, "label_en": h.kelas}
+    )
     label_display = _get_label(h.kelas)
     warna = "#16A34A" if h.confidence >= CONFIDENCE_THRESHOLD else "#F59E0B"
     st.markdown(
@@ -767,7 +770,9 @@ def bar_probabilitas(semua_prob: dict[str, float], top_n: int = 6) -> None:
         with st.expander(_t("prob_expander", n=len(diurutkan) - top_n)):
             sisa_html = ""
             for nama, prob in diurutkan[top_n:]:
-                meta = CLASS_META.get(nama, {"emoji": "📌", "label": nama, "label_en": nama})
+                meta = CLASS_META.get(
+                    nama, {"emoji": "📌", "label": nama, "label_en": nama}
+                )
                 pct_w = f"{prob * 100:.1f}%"
                 sisa_html += f"""
                 <div class="prob-row">
@@ -829,7 +834,7 @@ def render_sidebar() -> None:
 
         st.markdown(
             f'<div style="font-size:10px; color:#94A3B8; text-align:center; letter-spacing:1px;font-weight:600">'
-            f'{_t("sidebar_footer")}</div>',
+            f"{_t('sidebar_footer')}</div>",
             unsafe_allow_html=True,
         )
 
@@ -885,7 +890,8 @@ def halaman_utama() -> None:
 
     with col_kiri:
         st.markdown(
-            f'<span class="upload-label">{_t("upload_label")}</span>', unsafe_allow_html=True
+            f'<span class="upload-label">{_t("upload_label")}</span>',
+            unsafe_allow_html=True,
         )
         sumber = st.radio(
             "Pilih sumber gambar",
@@ -983,7 +989,8 @@ def halaman_utama() -> None:
                         img_show = Image.open(io.BytesIO(files_batch[i + j].read()))
                         st.image(img_show, width="stretch")
                         meta = CLASS_META.get(
-                            h.kelas, {"emoji": "📌", "label": h.kelas, "label_en": h.kelas}
+                            h.kelas,
+                            {"emoji": "📌", "label": h.kelas, "label_en": h.kelas},
                         )
                         warna = (
                             "#16A34A"
@@ -1010,7 +1017,9 @@ def halaman_utama() -> None:
                 [
                     {
                         _t("tbl_file"): nama,
-                        _t("tbl_prediction"): f"{CLASS_META.get(h.kelas, {}).get('emoji', '')}{h.kelas}",
+                        _t(
+                            "tbl_prediction"
+                        ): f"{CLASS_META.get(h.kelas, {}).get('emoji', '')}{h.kelas}",
                         _t("tbl_label"): _get_label(h.kelas),
                         _t("tbl_confidence"): f"{h.confidence:.2%}",
                         _t("tbl_time"): f"{h.waktu_inferensi_ms:.0f}",
